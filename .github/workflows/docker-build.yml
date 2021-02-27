@@ -1,0 +1,19 @@
+name: Docker build
+
+# Run weekly update to the archlinux docker container
+on:
+  schedule:
+    - cron "0 0 * * 0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Docker-Login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: Docker-Build
+        run: docker build ./.docker -t niraami/arch-build
+      - name: Docker-Push
+        run: docker push niraami/arch-build:latest
