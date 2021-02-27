@@ -1,0 +1,17 @@
+name: Main CI build
+
+# For all pushes to the main branch
+on:
+  push:
+#    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: niraami/arch-build:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        run: pacman -Syyu
+          
