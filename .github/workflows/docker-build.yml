@@ -3,7 +3,7 @@ name: Docker build
 # Run weekly update to the archlinux docker container
 on:
   schedule:
-    - cron "0 0 * * 0"
+    - cron: '0 0 * * 0'
 
 jobs:
   build:
