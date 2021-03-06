@@ -10,8 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: niraami/arch-build:latest
+      options: --user build
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        run: |
+          cd ~
+          git clone https://github.com/niraami/dotfiles
       - name: Prepare
-        run: sudo pacman -Syyu --noconfirm
+        run: |
+          cd ~
+          pacman -Syyu --noconfirm
+          git clone https://aur.archlinux.org/yay.git
+          cd yay
+          makepkg -si
+
           
